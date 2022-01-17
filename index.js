@@ -5,7 +5,6 @@ const words = JSON.parse(fs.readFileSync("fiveLetterWords.json"));
 
 const randomInt = Math.floor(Math.random() * words.length);
 const randomWord = words[randomInt];
-console.log(randomWord);
 
 let guessCounter = 0;
 const attempts = readLineSync.question('how many attempts would you like?\n')
@@ -14,15 +13,16 @@ const correctLetters = []
 const hintLetters = []
 
 while (guessCounter < attempts){
-  const guess = readLineSync.question("guess a 5 letter word\n");
+  guessCounter++;
+  const guess = readLineSync.question(`Attempt #${guessCounter}\nGuess a 5 letter word\n`);
 
   if(guess.length != 5){
-    console.log('enter a word with 5 letters!')
+    console.log('ERROR! Enter a word with 5 letters!')
     continue
   }
 
   if(!(words.includes(guess))){
-    console.log(`${guess} is not a word`)
+    console.log(`ERROR! '${guess}' is not a word`)
     continue
   }
 
@@ -55,7 +55,7 @@ while (guessCounter < attempts){
   console.log(`You got these letters correct but in the wrong place: ${hintLetters}`)
 
     
-  guessCounter++;
+  
 
   if(!(correctLetters.includes('?'))){
     console.log(`congrats! You won in ${guessCounter} guesses!`)
@@ -63,5 +63,5 @@ while (guessCounter < attempts){
   
 }
 
-console.log("game over")
+console.log(`game over\nThe word was: '${randomWord}'`)
 
