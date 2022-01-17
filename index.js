@@ -9,8 +9,19 @@ console.log(randomWord);
 
 let guess = "";
 let guessCounter = 0;
-while (guessCounter > 6){
-  guess = readLineSync;
-  console.log(guess)
+
+while (guessCounter < 3){
+  const guess = readLineSync.question("guess a 5 letter word\n");
+
+  if(guess.length != 5){
+    continue
+  }
+
+  if(!(words.includes(guess))){
+    console.log('not a word')
+    continue
+  }
+
+  guessCounter++
 }
 
