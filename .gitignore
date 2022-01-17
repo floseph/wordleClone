@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# words.json / unfiltered file
+words.json
