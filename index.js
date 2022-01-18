@@ -10,6 +10,7 @@ let guessCounter = 0;
 const attempts = readLineSync.question('how many attempts would you like?\n')
 
 const correctLetters = []
+const wrongLetters = []
 const hintLetters = []
 
 while (guessCounter < attempts){
@@ -29,16 +30,33 @@ while (guessCounter < attempts){
   const wordSplit = [...randomWord]
   const guessSplit = [...guess]
   
+  
 
+  //correct letters
   for(let i = 0; i < wordSplit.length; i++){
     if(wordSplit[i] === guessSplit[i]){
       correctLetters[i] = guessSplit[i]
     }
   }
 
+  //hint letters
   for(i of guessSplit){
     if(wordSplit.includes(i) && !(correctLetters.includes(i)) && !(hintLetters.includes(i))){
       hintLetters.push(i)
+    }
+  }
+
+  for(let i = 0; i < hintLetters.length; i++){
+    if(correctLetters.includes(hintLetters[i])){
+      hintLetters.splice(i,1)
+    }
+  }
+
+
+  //wrong letters
+  for(i of guessSplit){
+    if(!(wordSplit.includes(i)) && !(wrongLetters.includes(i))){
+      wrongLetters.push(i)
     }
   }
 
@@ -53,15 +71,16 @@ while (guessCounter < attempts){
   console.log(`Your guess: ${guess}`);
   console.log(`You got these letters in the correct place: ${correctLetters}`)
   console.log(`You got these letters correct but in the wrong place: ${hintLetters}`)
+  console.log(`You got these letters wrong: ${wrongLetters}`)
 
     
   
 
   if(!(correctLetters.includes('?'))){
-    console.log(`congrats! You won in ${guessCounter} guesses!`)
+    console.log(`Congrats! You won in ${guessCounter} guesses!`)
   }  
   
 }
 
-console.log(`game over\nThe word was: '${randomWord}'`)
+console.log(`Game Over\nThe word was: '${randomWord}'`)
 
